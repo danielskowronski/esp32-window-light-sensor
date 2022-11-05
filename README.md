@@ -29,3 +29,9 @@ Follow [HomeSpan User Guide](https://github.com/HomeSpan/HomeSpan/blob/master/do
 ### MQTT
 
 TBD (not yet implemented)
+
+### Label
+
+To get label like this, follow [./label/LABEL.md](./label/LABEL.md)
+
+![](./label/label_demo.png)
