@@ -11,15 +11,22 @@ struct LightSensor : Service::LightSensor {
     light->setRange(0,65535);
         
     Serial.print("Configuring Light Sensor");
-    Serial.print("\n");
 
-    GY302.begin(); // TODO: handle initialization errors
+    Wire.begin();
+    bool initialized = GY302.begin();
+
+    if (initialized) {
+      Serial.println("OK");
+    }
+    else {
+      Serial.println("FAILED");
+    }
   } 
 
   void loop(){
     if(light->timeVal()>2500){
       uint16_t lux = GY302.readLightLevel();
-      light->setVal(lux); 
+      light->setVal(lux); // Characteristic::StatusFault does not work so letting it be 65534
 
       LOG1("Light Update: ");
       LOG1(lux);

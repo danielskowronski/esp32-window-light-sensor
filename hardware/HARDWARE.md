@@ -5,8 +5,8 @@
 - MCU: ESP32 Dev Board - see [MCU.md](MCU.md)
 - light sensor: **BH1750** (`BH1750FVI`) in GY-302 kit
 - temperature sensor: **BMP280** in HW-611 kit
-- 5x7cm double-sided prototype board
-- IDC10 board connector: 1x angled, 1x straight
+- 5x7cm double-sided prototype board, KYNAR wires
+- IDC10 board connector: 2x angled
 - IDC10 terminated ribbon cable to be routed at edge of window glass (so it can be behind shades), 3m
 - plastic case - Kradex Z34B
 
@@ -32,7 +32,7 @@ Fritzing project: [esp32-lightsensor.fzz](esp32-lightsensor.fzz)
 
 ### BMP280
 
-I2C is enabled by default, pulling **CSB** pin low will turn I2C off and activate SPI. That means while it should be connected to VDD (but never pulled high when VDD is floating) it can be safely left floating.
+Pulling **CSB** pin low will turn I2C off and activate SPI. On short wires I2C may be active even if **CSB** is left floating, but it really should be linked to **VDD**!
 
 I2C address is `0x76` when **SDO** pin is pulled low or floating, pulling it high will switch it to `0x77`. I2C address can be switched at any moment.
 
