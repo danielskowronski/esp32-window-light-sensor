@@ -15,6 +15,7 @@ Arduino sketch - [./software/esp32-window-light-sensor/](./software/esp32-window
     - until https://github.com/HomeSpan/HomeSpan/issues/414 is resolved, fork https://github.com/danielskowronski/HomeSpan is required for "upgraded" Home
 - BH1750 v1.3.0
 - BMP280 v2.6.6
+- PubSubClient v2.8
 
 ## Hardware
 
@@ -28,7 +29,40 @@ Follow [HomeSpan User Guide](https://github.com/HomeSpan/HomeSpan/blob/master/do
 
 ### MQTT
 
-TBD (not yet implemented)
+#### Configuration
+
+**FIXME** - move to `SpanUserCommand` and `nvs_set_*` as seen on https://github.com/HomeSpan/HomeSpan/blob/master/Other%20Examples/ProgrammableHub/ProgrammableHub.ino#L99
+
+Define following in `MQTT_AUTH.h`:
+
+```c
+#define mqtt_ip "..."
+#define mqtt_user "..."
+#define mqtt_pass "..."
+```
+
+
+#### HomeAssistant
+
+**FIXME** - add more sensors (temperature and pressure)
+
+It is assumed that you know MAC address, have working Mosquito broker with auth enabled (https://github.com/home-assistant/addons/blob/master/mosquitto/DOCS.md) and MQTT broker integration in HA (https://www.home-assistant.io/integrations/mqtt/#broker-configuration).
+
+Add following to `/config/configuration.yaml`:
+
+```yaml
+mqtt:
+  sensor:
+    - state_topic: "esp32-window-light-sensor/XX:XX:XX:XX:XX:XX/lux"
+      name: "esp32-window-light-sensor/XX:XX:XX:XX:XX:XX/lux"
+      unique_id: "esp32-window-light-sensor/XX:XX:XX:XX:XX:XX/lux"
+      unit_of_measurement: "lx"
+      device_class: illuminance
+      device:
+        manufacturer: "DS"
+        model: "esp32-window-light-sensor"
+        connections: [["mac", "XX:XX:XX:XX:XX:XX"]]
+```
 
 ### Label
 

@@ -26,6 +26,7 @@ struct LightSensor : Service::LightSensor {
   void loop(){
     if(light->timeVal()>2500){
       uint16_t lux = GY302.readLightLevel();
+      last_lux = lux;
       light->setVal(lux); // Characteristic::StatusFault does not work so letting it be 65534
 
       LOG1("Light Update: ");
