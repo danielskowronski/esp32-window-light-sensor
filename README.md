@@ -16,6 +16,7 @@ Arduino sketch - [./software/esp32-window-light-sensor/](./software/esp32-window
 - BH1750 v1.3.0
 - BMP280 v2.6.6
 - PubSubClient v2.8
+- ArduinoNvs https://github.com/rpolitex/ArduinoNvs
 
 ## Hardware
 

@@ -15,6 +15,9 @@ int last_lux=0;
 void setup() {
   Serial.begin(115200);
 
+  NVS.begin();
+  readMQTTConfig();
+
   homeSpan.begin(Category::Bridges,"esp32-window-light-sensor Bridge");
   new SpanAccessory();  
     new Identify("esp32-window-light-sensor Bridge","DS",WiFi.macAddress().c_str(),"esp32-window-light-sensor Bridge", VER ,3);
@@ -28,6 +31,8 @@ void setup() {
   new SpanAccessory();                                                          
     new Identify("esp32-window-light-sensor Temperature Sensor","DS",WiFi.macAddress().c_str(),"esp32-window-light-sensor Temperature Sensor", VER, 7);
     new TemperatureSensor();
+
+  new SpanUserCommand('m',"configure MQTT",configureMQTT);
 
   homeSpan.setWifiCallback(setupMQTT);
 }

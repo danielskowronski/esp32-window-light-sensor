@@ -1,0 +1,5 @@
+- [x] MQTT configurability and retries - dirty implementation
+- [ ] MQTT polishing
+- [ ] improve loggin in MQTT dirty code
+- [ ] publish more topics (temperature, pressure)
+- [ ] docs, examples
